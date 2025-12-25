@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.zip
+*.crx
+*.pem
+
+# Logs
+*.log
+
+# Sensitive files (API keys should never be committed)
+# Keys are stored in Chrome's local storage, not in files
+
+# Temporary files
+tmp/
+temp/
+

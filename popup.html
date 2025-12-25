@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobFill AI - Smart Job Autofill</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="popup-container">
+    <!-- Header with branding -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">JobFill AI</span>
+        </div>
+        <div class="version">v1.0</div>
+      </div>
+    </header>
+
+    <!-- Site Status Banner -->
+    <div id="siteStatusBanner" class="site-status-banner">
+      <div class="site-status-content">
+        <div class="site-info">
+          <span class="site-icon" id="siteStatusIcon">●</span>
+          <span class="site-domain" id="currentSiteDomain">Loading...</span>
+        </div>
+        <button type="button" id="toggleSiteBtn" class="site-toggle-btn">
+          <span id="toggleBtnText">Enable</span>
+        </button>
+      </div>
+      <div id="siteStatusMessage" class="site-status-message"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Quick Stats -->
+      <div class="stats-row">
+        <div class="stat-item" id="statResume">
+          <span class="stat-icon">📄</span>
+          <span class="stat-label">Resume</span>
+          <span class="stat-status" id="resumeStatStatus">—</span>
+        </div>
+        <div class="stat-item" id="statAI">
+          <span class="stat-icon">🤖</span>
+          <span class="stat-label">AI</span>
+          <span class="stat-status" id="aiStatStatus">—</span>
+        </div>
+        <div class="stat-item" id="statSites">
+          <span class="stat-icon">🌐</span>
+          <span class="stat-label">Sites</span>
+          <span class="stat-status" id="sitesStatStatus">0</span>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button type="button" class="tab active" data-tab="resume">Resume</button>
+        <button type="button" class="tab" data-tab="ai">AI Settings</button>
+        <button type="button" class="tab" data-tab="advanced">Advanced</button>
+      </div>
+
+      <!-- Tab Content: Resume -->
+      <div class="tab-content active" id="tab-resume">
+        <div class="card">
+          <div class="card-header">
+            <h3>Your Resume</h3>
+            <span class="card-badge" id="resumeBadge">Not uploaded</span>
+          </div>
+          <div class="card-body">
+            <textarea id="resumeText"
+              placeholder="Paste your resume text here. The AI will extract your information automatically..."></textarea>
+            <button type="button" id="saveResume" class="btn btn-primary">
+              <span class="btn-icon">✨</span> Analyze & Save Resume
+            </button>
+            <div id="resumeStatus" class="status-message"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: AI Settings -->
+      <div class="tab-content" id="tab-ai">
+        <div class="card">
+          <div class="card-header">
+            <h3>AI Provider</h3>
+            <span class="card-badge configured" id="aiBadge">Not configured</span>
+          </div>
+          <div class="card-body">
+            <p class="helper-text">Choose your preferred AI provider. You only need ONE key.</p>
+
+            <!-- Provider Selection -->
+            <div class="provider-tabs">
+              <button type="button" class="provider-tab active" data-provider="openai">
+                <span class="provider-logo">◐</span> OpenAI
+              </button>
+              <button type="button" class="provider-tab" data-provider="gemini">
+                <span class="provider-logo">◆</span> Gemini
+              </button>
+            </div>
+
+            <!-- OpenAI Config -->
+            <div class="provider-config active" id="config-openai">
+              <div class="input-group">
+                <label>OpenAI API Key</label>
+                <div class="input-with-status">
+                  <input type="password" id="openaiKey" placeholder="sk-..." />
+                  <span class="input-status" id="openaiKeyStatus"></span>
+                </div>
+                <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" class="help-link">Get your
+                  API key →</a>
+              </div>
+              <button type="button" id="saveOpenaiKey" class="btn btn-secondary">Save OpenAI Key</button>
+            </div>
+
+            <!-- Gemini Config -->
+            <div class="provider-config" id="config-gemini">
+              <div class="input-group">
+                <label>Google Gemini API Key</label>
+                <div class="input-with-status">
+                  <input type="password" id="geminiKey" placeholder="AIza..." />
+                  <span class="input-status" id="geminiKeyStatus"></span>
+                </div>
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" class="help-link">Get
+                  your API key →</a>
+              </div>
+              <button type="button" id="saveGeminiKey" class="btn btn-secondary">Save Gemini Key</button>
+            </div>
+
+            <div id="apiStatus" class="status-message"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Advanced -->
+      <div class="tab-content" id="tab-advanced">
+        <div class="card">
+          <div class="card-header">
+            <h3>Whitelisted Sites</h3>
+          </div>
+          <div class="card-body">
+            <div id="whitelistContainer" class="whitelist-container">
+              <!-- Sites will be populated here -->
+            </div>
+            <div id="whitelistEmpty" class="empty-state">
+              No sites whitelisted yet. Visit a job site and enable it above.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header collapsible" id="debugHeader">
+            <h3>Debug & Mappings</h3>
+            <span class="collapse-icon">▼</span>
+          </div>
+          <div class="card-body collapsible-content" id="debugContent">
+            <div class="input-group">
+              <label>Generic Field Answers (JSON)</label>
+              <textarea id="genericFieldAnswers" class="code-textarea"></textarea>
+            </div>
+            <div class="input-group">
+              <label>Experiences (JSON)</label>
+              <textarea id="experiences" class="code-textarea"></textarea>
+            </div>
+            <div class="input-group">
+              <label>Site to Generic Mappings (JSON)</label>
+              <textarea id="siteToGeneric" class="code-textarea"></textarea>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="enableLogging" />
+              <label for="enableLogging">Enable debug logging</label>
+            </div>
+            <div class="btn-row">
+              <button type="button" id="refreshMappings" class="btn btn-small">Refresh</button>
+              <button type="button" id="saveMappings" class="btn btn-small btn-secondary">Save</button>
+              <button type="button" id="applyGenericToSite" class="btn btn-small">Apply to Site</button>
+            </div>
+            <div id="mappingsStatus" class="status-message"></div>
+
+            <div class="input-group logs-section">
+              <label>Logs</label>
+              <pre id="logs" class="logs-container"></pre>
+              <div class="btn-row">
+                <button type="button" id="refreshLogs" class="btn btn-small">Refresh Logs</button>
+                <button type="button" id="clearLogs" class="btn btn-small btn-danger">Clear Logs</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Made with ❤️ for job seekers</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
