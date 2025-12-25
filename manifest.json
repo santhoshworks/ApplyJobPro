@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Smart Job Autofill",
+  "name": "ApplyJob Pro",
   "version": "1.0.0",
-  "description": "AI-powered job application autofill using your resume",
+  "description": "AI-powered job application autofill that learns from your resume. Auto-fills forms on Greenhouse, Lever, Workday & more. Saves hours on repetitive applications.",
   "permissions": [
     "storage",
     "activeTab",

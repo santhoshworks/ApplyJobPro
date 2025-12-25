@@ -1,4 +1,4 @@
-// Smart Job Autofill - Background Service Worker
+// ApplyJob Pro - Background Service Worker
 // Privacy-first: All data stored locally, no tracking, no ads
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
