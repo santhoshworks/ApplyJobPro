@@ -9,7 +9,27 @@ Stop wasting hours filling out repetitive job applications. ApplyJob Pro uses AI
 
 ---
 
-## 😫 The Problem
+## � Privacy & Transparency
+
+> **Your data is YOUR data. Period.**
+
+| Principle | What It Means |
+|-----------|---------------|
+| **🔑 Bring Your Own Key (BYOK)** | You provide your own OpenAI/Gemini API key. We never see it, store it, or have access to it. |
+| **💾 100% Local Storage** | All data (resume, profile, saved answers) is stored in your browser's local storage. Nothing leaves your device except AI requests you initiate. |
+| **🚫 No Backend** | We have zero servers, zero databases, zero cloud infrastructure. There's nowhere for your data to leak to. |
+| **👁️ No Tracking** | No analytics, no telemetry, no usage data collection. We literally can't see how you use the extension. |
+| **📖 Open Source** | Every line of code is visible in this repository. Audit it yourself. |
+
+**How AI requests work:**
+- When you use AI features, YOUR API key sends requests directly from YOUR browser to OpenAI/Google
+- We are not a proxy—your browser talks directly to the AI provider
+- Only the minimum context needed (field label + relevant resume excerpt) is sent
+- You can use the extension without AI—local resume parsing works completely offline
+
+---
+
+## �😫 The Problem
 
 Job seekers face these frustrations daily:
 
@@ -59,11 +79,13 @@ ApplyJob Pro solves all of this:
 - **All Input Types**: Text, textarea, select, radio buttons, checkboxes
 - **Multi-Page Forms**: Persists across form navigation
 
-### 🔒 Privacy-First Design
-- **100% Local Storage**: All data stays in your browser
-- **No Tracking**: Zero analytics, ads, or data collection
-- **Your API Keys**: You control the AI connection
-- **Site Whitelist**: Only activates on sites you approve
+### 🔒 Privacy-First Design (No Backend!)
+- **Bring Your Own Key**: Use YOUR OpenAI/Gemini API key—we never see or store it on any server
+- **100% Local Storage**: All data stays in Chrome's local storage on YOUR device
+- **Zero Infrastructure**: No servers, no databases, no cloud = no data breaches possible
+- **No Tracking**: Zero analytics, telemetry, ads, or usage monitoring
+- **Site Whitelist**: Extension only activates on domains YOU explicitly approve
+- **Open Source**: Full code transparency—audit every line yourself
 
 ---
 
