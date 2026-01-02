@@ -663,6 +663,25 @@ textarea#resumeText {
   color: var(--gray-500);
   border-top: 1px solid var(--gray-200);
   background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.footer-separator {
+  color: var(--gray-400);
+}
+
+.footer-link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
 }
 
 /* Scrollbar */

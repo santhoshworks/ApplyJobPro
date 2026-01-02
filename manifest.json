@@ -5,8 +5,7 @@
   "description": "AI-powered job application autofill that learns from your resume. Auto-fills forms on Greenhouse, Lever, Workday & more.",
   "permissions": [
     "storage",
-    "activeTab",
-    "scripting"
+    "activeTab"
   ],
   "host_permissions": [
     "<all_urls>"
